@@ -1,0 +1,47 @@
+name: Python Project Config
+version: 1.0.0
+schema: v1
+
+models:
+  # Основная модель для чата (быстрая)
+  - name: 🚀 Qwen 7B (Чат)
+    provider: ollama
+    model: qwen2.5-coder:7b
+    apiBase: http://localhost:11434
+    roles: [ chat, edit, apply ]
+    defaultCompletionOptions:
+      temperature: 0.1
+
+  # Мощная модель для сложных задач
+  - name: 🧠 DeepSeek 16B (Мощный)
+    provider: ollama
+    model: deepseek-coder-v2:16b
+    apiBase: http://localhost:11434
+    roles: [chat, edit, apply]
+    defaultCompletionOptions:
+      temperature: 0.1
+
+  # Автодополнения - Mellum 4B (полностью в RAM для экономии VRAM)
+#  - name: ⚡ Mellum 4B (Автодополнения)
+#    provider: ollama
+#    model: JetBrains/Mellum-4b-sft-python:latest
+#    apiBase: http://localhost:11434
+#    roles: [ autocomplete ]
+#    autocompleteOptions:
+#      debounceDelay: 150
+#      maxPromptTokens: 1024
+#      onlyMyCode: true
+#      useCache: true
+#      useImports: true
+#      useRecentlyEdited: true
+#    defaultCompletionOptions:
+#      temperature: 0.1
+
+context:
+  # Провайдеры контекста для AI (что он "видит")
+  - provider: file
+  - provider: code
+  - provider: diff
+  - provider: terminal
+  - provider: folder
+  - provider: tree # структура текущего рабочего пространства.
